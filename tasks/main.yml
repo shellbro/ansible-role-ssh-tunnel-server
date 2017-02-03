@@ -1,0 +1,7 @@
+---
+- name: configure SSH service
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    line: GatewayPorts clientspecified
+  notify:
+    - restart SSH service
