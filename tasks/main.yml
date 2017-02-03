@@ -5,3 +5,9 @@
     line: GatewayPorts clientspecified
   notify:
     - restart SSH service
+- name: open firewall ports
+  firewalld:
+    port: 12200-12209/tcp
+    state: enabled
+    permanent: yes
+    immediate: yes
