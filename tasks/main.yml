@@ -1,13 +1,15 @@
 ---
 - name: configure sshd
   lineinfile:
-    dest: /etc/ssh/sshd_config
+    path: /etc/ssh/sshd_config
     line: GatewayPorts clientspecified
   notify:
     - restart sshd
+  become: yes
 - name: open firewall ports
   firewalld:
     port: 12200-12209/tcp
     state: enabled
     permanent: yes
     immediate: yes
+  become: yes
