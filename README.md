@@ -8,7 +8,7 @@ Ansible role for setting up SSH tunnel on Fedora and CentOS 7 (server side).
 Requirements
 ------------
 
-None
+Ansible version >= 2.3.
 
 Role Variables
 --------------
