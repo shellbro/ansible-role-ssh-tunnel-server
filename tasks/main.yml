@@ -3,8 +3,7 @@
   lineinfile:
     path: /etc/ssh/sshd_config
     line: GatewayPorts clientspecified
-  notify:
-    - restart sshd service
+  notify: restart sshd service
   become: yes
 - name: check if firewalld is running
   command: systemctl status firewalld
