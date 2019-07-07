@@ -15,7 +15,8 @@ provisioner:
     name: ansible-lint
     options:
       x:
-        - 303
+        - 303   # development env
+        - ANSIBLE0006  # Travis CI
 verifier:
   name: testinfra
   lint:
