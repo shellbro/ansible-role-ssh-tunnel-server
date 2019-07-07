@@ -25,6 +25,7 @@
   tags: notest
   command: systemctl is-active firewalld
   changed_when: false
+  check_mode: false
   register: firewalld_is_running_results
 
 - name: Open firewall port
