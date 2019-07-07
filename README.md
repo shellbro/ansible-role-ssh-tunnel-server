@@ -3,6 +3,8 @@ shellbro.ssh-tunnel-server
 
 [![Build Status](https://travis-ci.org/shellbro/ansible-role-ssh-tunnel-server.svg?branch=master)](https://travis-ci.org/shellbro/ansible-role-ssh-tunnel-server)
 
+https://galaxy.ansible.com/shellbro/ssh_tunnel_server
+
 Ansible role for setting up SSH tunnel between two CentOS 7 machines (server
 side). Uses autossh and systemd for persistance.
 
