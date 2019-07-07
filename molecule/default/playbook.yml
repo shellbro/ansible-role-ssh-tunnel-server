@@ -1,5 +1,10 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    notest: true
   roles:
     - role: ansible-role-ssh-tunnel-server
+      user: ec2-user
+      ssh_public_key_file: id_rsa.pub
+      port: 12322

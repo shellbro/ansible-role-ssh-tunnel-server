@@ -1,20 +1,40 @@
 ---
-- name: configure sshd service
+- name: Make sure user account exists
+  user:
+    name: "{{ user }}"
+  become: true
+
+- name: "Install client's SSH public key"
+  authorized_key:
+    user: "{{ user }}"
+    key: "{{ item }}"
+  with_file:
+    - "{{ ssh_public_key_file }}"
+  become: true
+
+- name: Configure sshd service for remote port forwarding
+  tags: notest
   lineinfile:
-    path: /etc/ssh/sshd_config
+    insertafter: "^#GatewayPorts "
     line: GatewayPorts clientspecified
-  notify: restart sshd service
-  become: yes
-- name: check if firewalld is running
-  command: systemctl status firewalld
-  register: firewalld_status
+    path: /etc/ssh/sshd_config
+  become: true
+  notify: Restart sshd service
+
+- name: Check if firewalld is running
+  tags: notest
+  command: systemctl is-active firewalld
   changed_when: false
-  failed_when: firewalld_status.rc > 4
-- name: open firewall ports
+  register: firewalld_is_running_results
+
+- name: Open firewall port
+  tags: notest
   firewalld:
-    port: 12200-12209/tcp
-    state: enabled
-    permanent: yes
     immediate: yes
-  when: firewalld_status.rc == 0
-  become: yes
+    permanent: yes
+    port: "{{ firewall_port }}/tcp"
+    state: enabled
+  become: true
+  when:
+    - firewalld_is_running_results.rc == 0
+    - firewall_port is defined

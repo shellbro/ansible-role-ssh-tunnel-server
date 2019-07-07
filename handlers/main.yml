@@ -1,6 +1,7 @@
 ---
-- name: restart sshd service
+- name: Restart sshd service
   service:
     name: sshd
     state: restarted
-  become: yes
+  become: true
+  when: notest is not defined

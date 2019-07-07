@@ -1,19 +1,26 @@
-ssh-tunnel-server
-=================
+shellbro.ssh-tunnel-server
+==========================
 
 [![Build Status](https://travis-ci.org/shellbro/ansible-role-ssh-tunnel-server.svg?branch=master)](https://travis-ci.org/shellbro/ansible-role-ssh-tunnel-server)
 
-Ansible role for setting up SSH tunnel on Fedora and CentOS 7 (server side).
+Ansible role for setting up SSH tunnel between two CentOS 7 machines (server
+side). Uses autossh and systemd for persistance.
+
+After applying this role to a server machine use `shellbro.ssh_tunnel_client`
+role on a client machine to estabish persistent tunnel.
 
 Requirements
 ------------
 
-Ansible version >= 2.3.
+Ansible version >= 2.4
 
 Role Variables
 --------------
 
-None
+* user - name of the user whose `authorized_keys` file will be modified
+(required)
+* ssh_public_key_file - path to SSH public key (by default `id_rsa.pub`)
+* firewall_port - if specified, open this port in firewall
 
 Dependencies
 ------------
@@ -23,9 +30,28 @@ None
 Example Playbook
 ----------------
 
-    - hosts: servers
+    - name: Configure server side on AWS
+      hosts: server-side
       roles:
-        - shellbro.ssh-tunnel-server
+        - role: shellbro.ssh-tunnel-server
+          user: ec2-user
+          ssh_public_key_file: id_rsa.pub
+          firewall_port: 12222
+
+    - name: >-
+        Set up persistent SSH tunnel for accessing SSH server
+        (running on the client side) behind corporate firewall
+      hosts: client-side
+      roles:
+        - role: shellbro.ssh-tunnel-client
+          server: server-side
+          server_user: ec2-user
+          user: devops
+          remote_port_forwarding: true
+          bind_address: 0.0.0.0
+          forward_port: 12222
+          target_host: 127.0.0.1
+          target_port: 22
 
 License
 -------
