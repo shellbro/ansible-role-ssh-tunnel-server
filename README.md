@@ -1,4 +1,4 @@
-shellbro.ssh-tunnel-server
+shellbro.ssh_tunnel_server
 ==========================
 
 [![Build Status](https://travis-ci.org/shellbro/ansible-role-ssh-tunnel-server.svg?branch=master)](https://travis-ci.org/shellbro/ansible-role-ssh-tunnel-server)
@@ -33,9 +33,9 @@ Example Playbook
 ----------------
 
     - name: Configure server side on AWS
-      hosts: server-side
+      hosts: server_side
       roles:
-        - role: shellbro.ssh-tunnel-server
+        - role: shellbro.ssh_tunnel_server
           user: ec2-user
           ssh_public_key_file: id_rsa.pub
           firewall_port: 12222
@@ -43,10 +43,10 @@ Example Playbook
     - name: >-
         Set up persistent SSH tunnel for accessing SSH server
         (running on the client side) behind corporate firewall
-      hosts: client-side
+      hosts: client_side
       roles:
-        - role: shellbro.ssh-tunnel-client
-          server: server-side
+        - role: shellbro.ssh_tunnel_client
+          server: server_side
           server_user: ec2-user
           user: devops
           remote_port_forwarding: true
