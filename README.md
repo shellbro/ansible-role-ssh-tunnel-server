@@ -21,7 +21,8 @@ Role Variables
 
 * user - name of the user whose `authorized_keys` file will be modified
 (required)
-* ssh_public_key_file - path to SSH public key (by default `id_rsa.pub`)
+* ssh_public_key_file - path to SSH public key (by default `id_rsa.pub`, file is
+required)
 * firewall_port - if specified, open this port in firewall
 
 Dependencies
@@ -42,9 +43,9 @@ Example Playbook
 
     - name: >-
         Set up persistent SSH tunnel for accessing SSH server
-        (running on the client side) behind corporate firewall
+        (running on the client side) behind firewall
       hosts: client_side
-      roles:
+          roles:
         - role: shellbro.ssh_tunnel_client
           server: server_side
           server_user: ec2-user
