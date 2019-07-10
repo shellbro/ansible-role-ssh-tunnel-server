@@ -19,11 +19,11 @@ Ansible version >= 2.4
 Role Variables
 --------------
 
-* user - name of the user whose `authorized_keys` file will be modified
+* user - name of a user whose `authorized_keys` file will be modified
 (required)
 * client_alive_interval - SSH connection setting (by default 15 seconds)
 * client_alive_count_max - SSH connection setting (by default 3)
-* ssh_public_key_file - name of file inside `files` directory containing SSH
+* ssh_public_key_file - name of a file inside `files` directory containing SSH
 public key (by default `id_rsa.pub`, file is required)
 * firewall_port - if specified, open this port in firewall
 
