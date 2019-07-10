@@ -21,7 +21,7 @@ Role Variables
 
 * user - name of the user whose `authorized_keys` file will be modified
 (required)
-* client_alive_interval - SSH connection setting (by default 60 seconds)
+* client_alive_interval - SSH connection setting (by default 15 seconds)
 * client_alive_count_max - SSH connection setting (by default 3)
 * ssh_public_key_file - path to SSH public key (by default `id_rsa.pub`, file is
 required)

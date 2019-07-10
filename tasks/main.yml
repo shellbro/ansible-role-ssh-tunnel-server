@@ -21,10 +21,13 @@
   with_items:
     - insertafter: "^#GatewayPorts "
       line: GatewayPorts clientspecified
+      regexp: "^GatewayPorts "
     - insertafter: "^#ClientAliveInterval "
       line: ClientAliveInterval {{ client_alive_interval }}
-    - insertafter: "^#ClientAliveCountMax "
+      regexp: "^ClientAliveInterval "
+    - insertafter: "^ClientAliveCountMax "
       line: ClientAliveCountMax {{ client_alive_count_max }}
+      regexp: "^ClientAliveCountMax "
   become: true
   notify: Restart sshd service
 
