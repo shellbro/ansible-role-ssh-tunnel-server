@@ -18,6 +18,7 @@
     insertafter: "{{ item.insertafter }}"
     line: "{{ item.line }}"
     path: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
   with_items:
     - insertafter: "^#GatewayPorts "
       line: GatewayPorts clientspecified
