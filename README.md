@@ -47,7 +47,7 @@ Example Playbook
         Set up persistent SSH tunnel for accessing SSH server
         (running on the client side) behind firewall
       hosts: client_side
-          roles:
+      roles:
         - role: shellbro.ssh_tunnel_client
           server: server_side
           server_user: ec2-user
