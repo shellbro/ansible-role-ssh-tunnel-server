@@ -23,8 +23,8 @@ Role Variables
 (required)
 * client_alive_interval - SSH connection setting (by default 15 seconds)
 * client_alive_count_max - SSH connection setting (by default 3)
-* ssh_public_key_file - path to SSH public key (by default `id_rsa.pub`, file is
-required)
+* ssh_public_key_file - name of file inside `files` directory containing SSH
+public key (by default `id_rsa.pub`, file is required)
 * firewall_port - if specified, open this port in firewall
 
 Dependencies
