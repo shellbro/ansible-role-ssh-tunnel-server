@@ -12,12 +12,19 @@
     - "{{ ssh_public_key_file }}"
   become: true
 
-- name: Configure sshd service for remote port forwarding
+- name: Configure sshd service for reliable remote port forwarding
   tags: notest
   lineinfile:
-    insertafter: "^#GatewayPorts "
-    line: GatewayPorts clientspecified
+    insertafter: "{{ item.insertafter }}"
+    line: "{{ item.line }}"
     path: /etc/ssh/sshd_config
+  with_items:
+    - insertafter: "^#GatewayPorts "
+      line: GatewayPorts clientspecified
+    - insertafter: "^#ClientAliveInterval "
+      line: ClientAliveInterval {{ client_alive_interval }}
+    - insertafter: "^#ClientAliveCountMax "
+      line: ClientAliveCountMax {{ client_alive_count_max }}
   become: true
   notify: Restart sshd service
 
