@@ -32,12 +32,13 @@
   become: true
   notify: Restart sshd service
 
-- name: Check if firewalld is running
+- name: Check if firewalld is active
   tags: notest
   command: systemctl is-active firewalld
   changed_when: false
   check_mode: false
-  register: firewalld_is_running_results
+  failed_when: false
+  register: firewalld_is_active_results
 
 - name: Open firewall port
   tags: notest
@@ -48,5 +49,5 @@
     state: enabled
   become: true
   when:
-    - firewalld_is_running_results.rc == 0
+    - firewalld_is_active_results.rc == 0
     - firewall_port is defined
