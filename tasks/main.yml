@@ -34,7 +34,7 @@
 
 - name: Check if firewalld is active
   tags: notest
-  command: systemctl is-active firewalld
+  command: /usr/bin/systemctl is-active firewalld
   changed_when: false
   check_mode: false
   failed_when: false
